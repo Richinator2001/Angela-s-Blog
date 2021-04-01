@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
 import os
+from dotenv import load_dotenv
 
 from sqlalchemy import ForeignKey
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -13,6 +14,7 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
 
+load_dotenv("../Environment_Variables/.env")
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
@@ -216,4 +218,4 @@ def delete_post(post_id):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
