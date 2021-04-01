@@ -48,8 +48,8 @@ class BlogPost(db.Model):
     date = db.Column(db.String(250), nullable=False)
     body = db.Column(db.Text, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    comments = db.relationship('Comment', backref='comments')
+    author_id = db.Column(db.Integer, ForeignKey('users.id'))
+    comments = relationship('Comment', backref='comments')
 
 
 
@@ -59,16 +59,16 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(200), nullable=False, unique=True)
     username = db.Column(db.String(1000), nullable=False)
     password = db.Column(db.String(200), nullable=False)
-    posts = db.relationship('BlogPost', backref="author")
-    comments = db.relationship('Comment', backref='comment_author')
+    posts = relationship('BlogPost', backref="author")
+    comments = relationship('Comment', backref='comment_author')
 
 
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.Text, nullable=False)
-    comment_author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    parent_post = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
+    comment_author_id = db.Column(db.Integer, ForeignKey('users.id'))
+    parent_post = db.Column(db.Integer, ForeignKey('blog_posts.id'))
 
 
 
