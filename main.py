@@ -73,7 +73,7 @@ class Comment(db.Model):
 
 
 # Only once during creation of database and new tables.
-# db.create_all()
+db.create_all()
 
 def admin_required(f):
     @wraps(f)
